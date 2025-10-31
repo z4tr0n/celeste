@@ -19,7 +19,7 @@ import {
   X
 } from 'lucide-react';
 
-// --- Componentes Reutilizáveis ---
+// --- Componentes ---
 
 // botao foda
 const Button = ({ children, variant = 'solid', className = '', ...props }) => {
@@ -54,7 +54,7 @@ const Input = ({ icon, placeholder, type = 'text', className = '', ...props }) =
   );
 };
 
-// Componente de Select (Dropdown) estilizado
+// Componente de Select
 const Select = ({ label, children, className = '', ...props }) => {
   return (
     <div className={`relative w-full ${className}`}>
@@ -72,7 +72,7 @@ const Select = ({ label, children, className = '', ...props }) => {
   );
 };
 
-// Rodapé geométrico azul
+// Rodapé 
 const GeometricFooter = () => (
   <footer className="relative w-full h-32 overflow-hidden">
     <div className="absolute -bottom-10 -left-10 w-full h-40 bg-gradient-to-r from-blue-800 to-blue-600 transform -skew-y-3"></div>
@@ -83,14 +83,12 @@ const GeometricFooter = () => (
   </footer>
 );
 
-// Cabeçalho geométrico azul 
+// Cabeçalho
 const GeometricHeader = ({ userName, profilePicUrl }) => (
   <header className="relative w-full h-48 bg-gradient-to-br from-blue-700 to-indigo-600 text-white p-6 shadow-lg overflow-hidden">
-    {/* Forma geométrica de fundo */}
     <div className="absolute -top-10 -right-20 w-64 h-64 bg-blue-500 opacity-20 rounded-full"></div>
     <div className="absolute top-10 -left-20 w-48 h-48 bg-indigo-400 opacity-20 rounded-full"></div>
 
-    {/* Conteúdo do Cabeçalho */}
     <div className="relative z-10 flex items-center justify-between">
       <img
         src={profilePicUrl}
@@ -106,7 +104,6 @@ const GeometricHeader = ({ userName, profilePicUrl }) => (
       <h1 className="text-xl font-semibold">Seja bem-vindo, {userName}!</h1>
     </div>
     
-    {/* Recorte angular na parte inferior */}
     <div 
       className="absolute bottom-0 left-0 w-full h-16 bg-gray-50" 
       style={{ clipPath: 'polygon(0 100%, 100% 0, 100% 100%)' }}
@@ -119,9 +116,9 @@ const GeometricHeader = ({ userName, profilePicUrl }) => (
   </header>
 );
 
-// --- Telas do Aplicativo ---
+// --- Telas ---
 
-// Tela 1: Onboarding "Encontre Quadras"
+// Tela 1
 const OnboardingScreen1 = ({ setScreen }) => {
   return (
     <div className="flex flex-col items-center justify-center min-h-full p-6 bg-gray-100">
@@ -139,13 +136,11 @@ const OnboardingScreen1 = ({ setScreen }) => {
           Navegue por centenas de quadras esportivas disponíveis na sua região. Filtre por cidade, estado e tipo de esporte.
         </p>
 
-        {/* Navegação */}
         <div className="flex items-center justify-between mt-8">
           <button className="text-gray-300 cursor-not-allowed p-2" disabled>
             <ChevronLeft size={28} />
           </button>
           
-          {/* Indicadores de Progresso */}
           <div className="flex space-x-2">
             {[1, 2, 3, 4, 5].map((i) => (
               <div
@@ -166,7 +161,7 @@ const OnboardingScreen1 = ({ setScreen }) => {
   );
 };
 
-// Tela 2: Onboarding "Agende Facilmente"
+// Tela 2
 const OnboardingScreen2 = ({ setScreen }) => {
   return (
     <div className="flex flex-col items-center justify-center min-h-full p-6 bg-gray-100">
@@ -184,13 +179,11 @@ const OnboardingScreen2 = ({ setScreen }) => {
           Reserve quadras em poucos cliques. Escolha data, horário e convide seus amigos para jogar junto.
         </p>
 
-        {/* Navegação */}
         <div className="flex items-center justify-between mt-8">
           <button className="text-blue-600 p-2 rounded-full hover:bg-blue-100" onClick={() => setScreen('onboarding1')}>
             <ChevronLeft size={28} />
           </button>
           
-          {/* Indicadores de Progresso */}
           <div className="flex space-x-2">
             {[1, 2, 3, 4, 5].map((i) => (
               <div
@@ -202,7 +195,6 @@ const OnboardingScreen2 = ({ setScreen }) => {
             ))}
           </div>
 
-          {/* A seta da direita agora leva para o Login */}
           <button className="text-blue-600 p-2 rounded-full hover:bg-blue-100" onClick={() => setScreen('login')}>
             <ChevronRight size={28} />
           </button>
@@ -212,7 +204,7 @@ const OnboardingScreen2 = ({ setScreen }) => {
   );
 };
 
-// Tela 3: Login
+// Tela 3
 const LoginScreen = ({ setScreen }) => {
   return (
     <div className="flex flex-col min-h-full bg-white">
@@ -248,7 +240,7 @@ const LoginScreen = ({ setScreen }) => {
   );
 };
 
-// Tela 4: Verificação de E-mail
+// Tela 4
 const EmailVerificationScreen = ({ setScreen }) => {
   const [otp, setOtp] = useState(['', '', '', '', '']);
   const inputsRef = React.useRef([]);
@@ -260,7 +252,6 @@ const EmailVerificationScreen = ({ setScreen }) => {
       newOtp[index] = value;
       setOtp(newOtp);
 
-      // Focar próximo input
       if (value !== '' && index < 4) {
         inputsRef.current[index + 1].focus();
       }
@@ -268,7 +259,6 @@ const EmailVerificationScreen = ({ setScreen }) => {
   };
 
   const handleKeyDown = (e, index) => {
-    // Focar input anterior ao apagar
     if (e.key === 'Backspace' && otp[index] === '' && index > 0) {
       inputsRef.current[index - 1].focus();
     }
@@ -297,11 +287,7 @@ const EmailVerificationScreen = ({ setScreen }) => {
               />
             ))}
           </div>
-          
-          {/* Exemplo de feedback de erro (descomentar para ver) */}
-          {/* <p className="text-red-500 text-sm mt-4">Código inválido. Tente novamente.</p> */}
-
-          <Button 
+       <Button 
             variant="solid" 
             className="mt-8"
             onClick={() => setScreen('profile')} // Simula sucesso
@@ -315,7 +301,7 @@ const EmailVerificationScreen = ({ setScreen }) => {
   );
 };
 
-// --- Componentes para Tela 5 ---
+// --- Componentes fodas Ttela 5 ---
 const CourtCard = ({ img, type, typeColor, name, location, icons, price }) => (
   <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
     <div className="relative">
@@ -354,7 +340,7 @@ const CourtCard = ({ img, type, typeColor, name, location, icons, price }) => (
   </div>
 );
 
-// Tela 5: Busca de Quadras
+// Tela 5
 const SearchScreen = ({ setScreen }) => {
   const courts = [
     { 
@@ -431,7 +417,6 @@ const SearchScreen = ({ setScreen }) => {
         </p>
       </div>
 
-      {/* Botão de navegação (para simulação) */}
       <Button variant="ghost" className="mt-4" onClick={() => setScreen('history')}>
         Ver Histórico (Simulação) <ArrowRight size={16} className="ml-2" />
       </Button>
@@ -439,7 +424,7 @@ const SearchScreen = ({ setScreen }) => {
   );
 };
 
-// --- Componentes para Tela 6 ---
+// --- Componentes tela 6 ---
 const ReservationHistoryCard = ({ name, date, members, status, progress, paid, total }) => {
   const getStatusStyles = () => {
     switch (status) {
@@ -511,7 +496,7 @@ const ReservationHistoryCard = ({ name, date, members, status, progress, paid, t
   );
 };
 
-// Tela 6: Histórico de Reservas
+// Tela 6
 const HistoryScreen = ({ setScreen }) => {
   const history = [
     { name: 'Arena Solar', date: '09/05', members: 7, status: 'Parcial', progress: 70, paid: '140,00', total: '200,00' },
@@ -534,7 +519,6 @@ const HistoryScreen = ({ setScreen }) => {
         </button>
       </div>
 
-      {/* Botão de navegação (para simulação) */}
       <Button variant="ghost" className="mt-4" onClick={() => setScreen('profile')}>
         Ver Perfil (Simulação) <ArrowRight size={16} className="ml-2" />
       </Button>
@@ -544,7 +528,7 @@ const HistoryScreen = ({ setScreen }) => {
   );
 };
 
-// Tela 7: Perfil / Painel do Usuário
+// Tela 7
 const ProfileScreen = ({ setScreen }) => {
   return (
     <div className="flex flex-col min-h-full bg-gray-100">
@@ -553,9 +537,7 @@ const ProfileScreen = ({ setScreen }) => {
         profilePicUrl="https://placehold.co/64x64/333333/FFFFFF?text=L"
       />
       
-      {/* O clip-path no cabeçalho cria o fundo angular, então o conteúdo começa abaixo */}
-      <main className="flex-grow p-6 -mt-16 relative z-20 space-y-6">
-        {/* Card de Mensagem */}
+     <main className="flex-grow p-6 -mt-16 relative z-20 space-y-6">
         <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-5">
           <p className="text-sm font-semibold text-gray-500 mb-2">Quadra Sport mandou uma mensagem</p>
           <p className="text-gray-800">
@@ -563,7 +545,6 @@ const ProfileScreen = ({ setScreen }) => {
           </p>
         </div>
 
-        {/* Seção Minhas Reservas */}
         <div>
           <h2 className="text-xl font-bold text-gray-900">Minhas Reservas</h2>
           <p className="text-sm text-gray-500 mt-1">Próximas reservas 14/08 - Quadra Central</p>
@@ -601,7 +582,6 @@ const ProfileScreen = ({ setScreen }) => {
           <option value="3">3</option>
         </Select>
         
-        {/* Botão de navegação (para simulação) */}
         <Button variant="outline" className="mt-8" onClick={() => setScreen('search')}>
           Buscar Quadras (Simulação)
         </Button>
@@ -609,15 +589,13 @@ const ProfileScreen = ({ setScreen }) => {
           Voltar ao Onboarding
         </Button>
       </main>
-
-      {/* Tela 7 não parece ter o rodapé, mas outras sim. Vou adicionar para consistência */}
-      <GeometricFooter />
+  <GeometricFooter />
     </div>
   );
 };
 
 
-// --- Componente Principal da Aplicação ---
+// --- Componente Principal---
 export default function App() {
   // Telas: 'onboarding1', 'onboarding2', 'login', 'emailVerification', 'search', 'history', 'profile'
   const [screen, setScreen] = useState('onboarding1');
