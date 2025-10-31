@@ -1,0 +1,15 @@
+# Dependências
+/node_modules
+
+# Arquivos de Build (quando você gerar a versão final)
+/dist
+
+# Arquivos de ambiente (contém senhas e chaves)
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
